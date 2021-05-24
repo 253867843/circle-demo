@@ -1,0 +1,8 @@
+version: 2 # circle-ci 版本
+jobs: # 任务
+  build: # 构建
+    docker: # 构建环境
+      - image: circleci/node:10
+    steps: # 步骤
+      - run: echo 'A first hello' 
+      - run: npm -v
