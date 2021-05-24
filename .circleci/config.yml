@@ -9,7 +9,7 @@ jobs: # 任务
     steps: # 步骤
       - add_ssh_keys:
           fingerprints:
-            - "86:60:54:e1:b0:fc:0c:6b:a9:88:83:9b:bc:87:75:e1"
+            - "86:60:54:e1:b0:fc:0c:6b:a9:88:83:9b:bc:87:75:e1"          
       - checkout
       - echo 'A first hello' 
       - npm -v
