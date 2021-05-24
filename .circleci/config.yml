@@ -3,6 +3,24 @@ jobs: # 任务
   build: # 构建
     docker: # 构建环境
       - image: circleci/node:10
+    branches: 
+      only:
+        - master
+    filters:
+      branches:
+        only: /master\/.*/      
     steps: # 步骤
-      - run: echo 'A first hello' 
-      - run: npm -v
+      - add_ssh_keys:
+        fingerprints:
+          - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+      - checkout
+      - echo 'A first hello' 
+      - npm -v
+      - run
+      name: Install # 执行名称为 Install 的任务
+      command: yarn install # 命令任务是安装项目中的依赖
+      - run
+      name: Build # 执行名称为 Build 的任务
+      command: yarn build # 命令任务是打包构建
+
+
