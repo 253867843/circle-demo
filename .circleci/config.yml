@@ -5,14 +5,11 @@ jobs: # 任务
       - image: circleci/node:10
     branches: 
       only:
-        - master
-    filters:
-      branches:
-        only: /master\/.*/      
+        - master    
     steps: # 步骤
       - add_ssh_keys:
-        fingerprints:
-          - "b7:35:a6:4e:9b:0d:6d:d4:78:1e:9a:97:2a:66:6b:be"
+          fingerprints:
+            - "86:60:54:e1:b0:fc:0c:6b:a9:88:83:9b:bc:87:75:e1"
       - checkout
       - echo 'A first hello' 
       - npm -v
