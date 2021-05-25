@@ -10,11 +10,21 @@ jobs:
           fingerprints:
             - "86:60:54:e1:b0:fc:0c:6b:a9:88:83:9b:bc:87:75:e1"          
       - checkout
-      - run: echo 'A first hello' 
-      - run: npm -v
+      - restore_cache:
+          key: dependencies_dcj
       - run:
           name: Install
           command: yarn install
+      - save_cache:
+          key: dependencies_dcj
+          paths:
+            - node_modules
       - run:
           name: Build
-          command: yarn build 
+          command: yarn build
+      - run: 
+          name: Prepare shell commands
+          command: chmod +x scripts/depoly.sh
+      - run: 
+          name: Run Depoly
+          command: ./scripts/depoly.sh
