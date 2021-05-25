@@ -5,7 +5,7 @@ jobs: # 任务
       - image: circleci/node:10
     branches: 
       only:
-        - master    
+        - master
     steps: # 步骤
       - add_ssh_keys:
           fingerprints:
@@ -14,10 +14,10 @@ jobs: # 任务
       - echo 'A first hello' 
       - npm -v
       - run
-      name: Install # 执行名称为 Install 的任务
-      command: yarn install # 命令任务是安装项目中的依赖
+          name: Install # 执行名称为 Install 的任务
+          command: yarn install # 命令任务是安装项目中的依赖
       - run
-      name: Build # 执行名称为 Build 的任务
-      command: yarn build # 命令任务是打包构建
+          name: Build # 执行名称为 Build 的任务
+          command: yarn build # 命令任务是打包构建
 
 
