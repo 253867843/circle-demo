@@ -21,23 +21,28 @@ cd gh-pages-branch
 git config --global user.email "$GH_EMAIL" >/dev/null 2>&1
 git config --global user.name "$GH_NAME" >/dev/null 2>&1
 git init
-git remote add -fetch origin "$remote" 
+git remote add --fetch origin "$remote"
 
 echo 'email is: '$GH_EMAIL
 echo 'name is: '$GH_NAME
 echo 'siteSource is: '$siteSource
 
 # 切换到 gh-pages 分支
-if git rev-parse --verify origin/gh-pages >/
+if git rev-parse --overify origin/gh-pages >/
 dev/null 2>&1;then
+  echo 'gh-pages is exist, delete gh-pages content'
   git checkout gh-pages
-  # 删除旧的文件内容
+  # 如果 gh-pages 分支存在, 则删除 gh-pages 分支中旧的文件内容
   rm -rf .  
 else 
+  # 如果 gh-pages 分支不存在，则创建无日志记录的 gh-pages 分支
+  echo 'gh-pages is non-existent, create gh-pages'
   git checkout --orphan gh-pages
 fi
 
 # 把构建好的文件目录给拷贝进来
+# siteSource === 'dist'
+# cp -a "../dist/." . 把 dist 目录下的所有内容复制到当前目录下
 cp -a "../${siteSource}/." .
 
 ls -la
@@ -46,7 +51,7 @@ ls -la
 git add -A
 # 添加一条内容提交
 git commit --allow-empty -m 'Depoly to Github Pages'
-# 推送文件
+# 推送文件到远程 gh-pages 分支
 git push --force --quiet origin gh-pages
 
 # 资源回收
